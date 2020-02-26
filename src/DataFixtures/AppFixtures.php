@@ -112,6 +112,7 @@ class AppFixtures extends Fixture
 
                 $recipe = new Recipes();
                 $recipe
+                    ->setTitle( $this->faker->word )
                     ->setPreparationDuration( $rand_time_1 )
                     ->setBakingDuration( $rand_time_2 )
                     ->setAdditionalInfos ($this->faker->paragraph(3, true) )
