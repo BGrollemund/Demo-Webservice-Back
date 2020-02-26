@@ -61,6 +61,11 @@ class Recipes
      */
     private $rating_stars;
 
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $title;
+
     public function __construct()
     {
         $this->recipeSteps = new ArrayCollection();
@@ -207,6 +212,18 @@ class Recipes
     public function setRatingStars(int $rating_stars): self
     {
         $this->rating_stars = $rating_stars;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
