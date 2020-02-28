@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200226100911 extends AbstractMigration
+final class Version20200227133423 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -28,7 +28,7 @@ final class Version20200226100911 extends AbstractMigration
         $this->addSql('CREATE TABLE recipe_ingredients (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, recipe_id INTEGER NOT NULL, ingredient_id INTEGER NOT NULL, quantity VARCHAR(150) NOT NULL)');
         $this->addSql('CREATE INDEX IDX_9F925F2B59D8A214 ON recipe_ingredients (recipe_id)');
         $this->addSql('CREATE INDEX IDX_9F925F2B933FE08C ON recipe_ingredients (ingredient_id)');
-        $this->addSql('CREATE TABLE recipes (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, preparation_duration TIME NOT NULL, baking_duration TIME NOT NULL, additional_infos CLOB DEFAULT NULL, rating_stars INTEGER NOT NULL, title VARCHAR(150) NOT NULL)');
+        $this->addSql('CREATE TABLE recipes (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, preparation_duration VARCHAR(255) NOT NULL, baking_duration VARCHAR(255) NOT NULL, additional_infos VARCHAR(255) DEFAULT NULL, rating_stars INTEGER NOT NULL, title VARCHAR(150) NOT NULL)');
         $this->addSql('CREATE INDEX IDX_A369E2B5A76ED395 ON recipes (user_id)');
         $this->addSql('CREATE TABLE recipe_steps (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, recipe_id INTEGER NOT NULL, step_id INTEGER NOT NULL, step_order INTEGER NOT NULL)');
         $this->addSql('CREATE INDEX IDX_2231DE6D59D8A214 ON recipe_steps (recipe_id)');

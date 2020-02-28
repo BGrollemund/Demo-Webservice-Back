@@ -104,18 +104,15 @@ class AppFixtures extends Fixture
     {
         for( $i=1; $i<6; $i++ ) {
             for( $j=1; $j<21; $j++ ) {
-                $rand_time_1 = new DateTime('now');
-                $rand_time_1->setTime(rand(0,2), rand(0,3) * 15 );
-
-                $rand_time_2 = new DateTime('now');
-                $rand_time_2->setTime(rand(0,1), rand(0,11) * 5 );
+                $rand_time_1 = '0' . rand(0,2) . ':' . ['00', '15', '30', '45'][rand(0,3)] ;
+                $rand_time_2 = '0' . rand(0,1) . ':' . ['00', '15', '30', '45'][rand(0,3)] ;
 
                 $recipe = new Recipes();
                 $recipe
                     ->setTitle( $this->faker->word )
                     ->setPreparationDuration( $rand_time_1 )
                     ->setBakingDuration( $rand_time_2 )
-                    ->setAdditionalInfos ($this->faker->paragraph(3, true) )
+                    ->setAdditionalInfos ($this->faker->words(10, true) )
                     ->setRatingStars( rand(1,5) )
                     ->setUser( $this->getReference('user-'.$i) );
                 $this->setReference('recipe-'.$i.'-'.$j, $recipe);

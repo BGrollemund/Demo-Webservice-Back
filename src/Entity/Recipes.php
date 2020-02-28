@@ -21,17 +21,17 @@ class Recipes
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string")
      */
     private $preparation_duration;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string")
      */
     private $baking_duration;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $additional_infos;
 
@@ -77,24 +77,24 @@ class Recipes
         return $this->id;
     }
 
-    public function getPreparationDuration(): ?\DateTimeInterface
+    public function getPreparationDuration(): ?string
     {
         return $this->preparation_duration;
     }
 
-    public function setPreparationDuration(\DateTimeInterface $preparation_duration): self
+    public function setPreparationDuration(string $preparation_duration): self
     {
         $this->preparation_duration = $preparation_duration;
 
         return $this;
     }
 
-    public function getBakingDuration(): ?\DateTimeInterface
+    public function getBakingDuration(): ?string
     {
         return $this->baking_duration;
     }
 
-    public function setBakingDuration(\DateTimeInterface $baking_duration): self
+    public function setBakingDuration(string $baking_duration): self
     {
         $this->baking_duration = $baking_duration;
 
