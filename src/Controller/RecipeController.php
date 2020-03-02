@@ -74,4 +74,50 @@ class RecipeController extends AbstractController
             'stepsLabel' => $stepsLabel
         ] );
     }
+
+    /**
+     * @Route("/api/recipes-with-ingredients/{recipe_id}", name="recipesWithIngredients")
+     * @param int $recipe_id
+     * @return JsonResponse
+     */
+    public function recipesWithIngredients( int $recipe_id )
+    {
+        $current_ingredients_object = $this
+            ->getDoctrine()
+            ->getRepository( Recipes::class )
+            ->find( $recipe_id )
+            ->getRecipeIngredients()
+            ->toArray();
+
+        $current_ingredients = [];
+
+        foreach( $current_ingredients_object as $current_ingredient_object ) {
+            $current_ingredients[] = $current_ingredient_object->getIngredient()->getId();
+        }
+        $recipes = $this
+            ->getDoctrine()
+            ->getRepository( Recipes::class )
+            ->findAll();
+
+        $result = [];
+
+        foreach( $recipes as $recipe ) {
+            if( count($result) >= 3 )  return $this->json( [ 'recipes' => $result ] );
+
+            $to_check_ingredients_object = $recipe
+                ->getRecipeIngredients()
+                ->toArray();
+            $to_check_ingredients = [];
+
+            foreach( $to_check_ingredients_object as $to_check_ingredient_object ) {
+                $to_check_ingredients[] = $to_check_ingredient_object->getIngredient()->getId();
+            }
+
+            if( count(array_intersect( $current_ingredients, $to_check_ingredients )) >=3 ) {
+                $result[] = $recipe;
+            }
+        }
+
+        return $this->json( [ 'recipes' => $result ] );
+    }
 }
